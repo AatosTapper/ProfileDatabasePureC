@@ -1,6 +1,7 @@
 # Compiler and compiler flags
 CC := gcc
 CFLAGS := -Wall -Wextra -g
+CVERSION := -std=c17
 
 # Directories
 SRC_DIR := src
@@ -33,5 +34,8 @@ $(TARGET): $(OBJS)
 
 # Clean the build
 clean:
-	del /s /q $(BUILD_DIR) $(BIN_DIR)
+	rm -rf $(BUILD_DIR)/* $(BIN_DIR)/*
+
+# del /s /q $(BUILD_DIR) $(BIN_DIR) <- Windows
+# rm -rf $(BUILD_DIR)/* $(BIN_DIR)/* <- MacOS
 

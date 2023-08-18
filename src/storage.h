@@ -4,6 +4,7 @@
 
 #include "profile.h"
 #include "string.h"
+#include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 
@@ -20,5 +21,6 @@ void saveToStorage(struct Profile* p);
 // caller has to check for NULL
 struct Profile* fetchFromStorage(char* name);
 void printAllProfiles();
+void freeStorage();
 
 #endif

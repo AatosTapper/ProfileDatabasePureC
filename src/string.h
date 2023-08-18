@@ -2,6 +2,7 @@
 #define STRING
 
 #include <stdlib.h>
+#include <stdio.h>
 
 void printString(char* ptr);
 

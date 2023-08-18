@@ -19,7 +19,6 @@ void saveToStorage(struct Profile* p)
         dynArray* newArr = malloc(sizeof(dynArray));
         newArr->size = profiles->size * 2;
         newArr->realSize = profiles->realSize;
-
         newArr->arr = malloc(sizeof(struct Profile) * newArr->size);
         memcpy(newArr->arr, profiles->arr, sizeof(struct Profile) * profiles->realSize);
 
@@ -46,9 +45,16 @@ struct Profile* fetchFromStorage(char* name)
     return NULL;
 }
 
+void freeStorage()
+{
+    free(profiles->arr);
+    free(profiles);
+}
+
 void printAllProfiles()
 {
-    for (int i = 0; i < profiles->realSize; i++)
+    printString("\n-----------\n");
+    for (unsigned i = 0; i < profiles->realSize; i++)
     {
         printf("Profile %d ", i);
 
