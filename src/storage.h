@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <assert.h>
 
 typedef struct 
 {
@@ -16,11 +17,13 @@ typedef struct
 } 
 dynArray;
 
+// -1 = profile not found
+int selectProfile(char* name, char* id);
 void initStorage();
 void saveToStorage(struct Profile* p);
-// caller has to check for NULL
-struct Profile* fetchFromStorage(char* name);
+void printSelectedProfile();
 void printAllProfiles();
 void freeStorage();
+
 
 #endif

@@ -2,6 +2,19 @@
 #include "storage.h"
 
 dynArray* profiles;
+struct Profile* selectedProfile;
+
+int getProfileByName(char* name)
+{
+    for (unsigned i = 0; i < profiles->realSize; i++)
+    {
+        if (strcmp(name, profiles->arr[i].name) == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
 
 void initStorage()
 {
@@ -31,18 +44,26 @@ void saveToStorage(struct Profile* p)
     profiles->realSize += 1;
 }
 
-struct Profile* fetchFromStorage(char* name)
+int selectProfile(char* name, char* id)
 {
-    for (unsigned i = 0; i < profiles->realSize; i++)
+    int index = getProfileByName(name);
+
+    if (index == -1)
     {
-        if (strcmp(name, profiles->arr[i].name) == 0)
-        {
-            return &profiles->arr[i];
-        }
+        return -1;
     }
-    printString("Profile wasn't in the database\n");
+
+    if (strcmp(profiles->arr[index].id, id) == 0)
+    {
+        selectedProfile = &profiles->arr[index];
+    }
+
+    else
+    {
+        return -1;
+    }
     
-    return NULL;
+    return 0;
 }
 
 void freeStorage()
@@ -51,22 +72,42 @@ void freeStorage()
     free(profiles);
 }
 
+
+// --- printing ---
+
+void printProfile(struct Profile* p)
+{
+    assert(p);
+
+    printString("\nProfile:");
+
+    printString("\n    First Name: ");
+    printString(p->name);
+
+    printString("\n    Last Name: ");
+    printString(p->lastName);
+
+    printString("\n    ID: ");
+    printString(p->id);
+
+    printString("\n    ----\n");
+}
+
+void printSelectedProfile()
+{
+    if (selectedProfile == NULL)
+    {
+        printString("You have to select a profile first\n");
+        return;
+    }
+
+    printProfile(selectedProfile);
+}
+
 void printAllProfiles()
 {
-    printString("\n-----------\n");
     for (unsigned i = 0; i < profiles->realSize; i++)
     {
-        printf("Profile %d ", i);
-
-        printString("\n    First Name: ");
-        printString(profiles->arr[i].name);
-
-        printString("\n    Last Name: ");
-        printString(profiles->arr[i].lastName);
-
-        printString("\n    ID: ");
-        printString(profiles->arr[i].id);
-        
-        printString("\n-----------\n");
+        printProfile(&profiles->arr[i]);
     }
 }

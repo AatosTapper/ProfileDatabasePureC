@@ -7,7 +7,6 @@
 #include "action.h"
 
 void runLoop();
-int getAction();
 void executeAction(int a);
 
 #endif

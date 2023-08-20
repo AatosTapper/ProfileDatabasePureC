@@ -4,48 +4,62 @@
 void runLoop()
 {
     initStorage();
-    int stop = 0;
+
+    int menuVal = 0;
+    printString("\n----PROFILE-DATABASE---\n");
     do 
     {
-        executeAction(getAction());
+        menuVal = act_mainMenu();
+        executeAction(menuVal);
 
-    } while (stop != -1);
+    } while (menuVal != -2);
     freeStorage();
-}
-
-int getAction()
-{
-    return 0;
+    printString("\n----database-closed---\n");
 }
 
 void executeAction(int a) 
 {
-    // the idea is that the user selects a profile and can
-    // do some stuff to it
-
-    // these aren't in order because the program flow
-    // happens via the action return values
+    if (a <= BACK)
+    {
+        return;
+    }
 
     switch (a)
     {
-    case 0:
+    case SELECT_PROFILE:
         executeAction(act_selectProfile());
         break;
 
-    case 1:
+    case ADD_PROFILE:
         executeAction(act_addProfile());
         break;
     
-    case 2:
+    case DELETE_PROFILE:
         executeAction(act_deleteProfile());
         break;
     
-    case 3:
+    case EDIT_PROFILE:
         executeAction(act_editProfile());
         break;
 
-    case 4:
-        executeAction(act_findProfile());
+    case SHOW_ALL_PROFILES:
+        executeAction(act_showAllProfiles());
+        break;
+
+    case HELP:
+        executeAction(act_help());
+        break;
+
+    case SHOW_SELECTED_PROFILE:
+        executeAction(act_showSelectedProfile());
+        break;
+
+    case PROFILE_MENU:
+        executeAction(act_profileMenu());
+        break;
+
+    case ALL_PROFILES_ACTIONS:
+        executeAction(act_allProfilesActions());
         break;
 
     default:
