@@ -79,6 +79,32 @@ int act_selectProfile()
 
 int act_addProfile()
 {
+    printString("\nAdd Profile 🆕\n");
+    printString(" -- Enter First Name: ");
+    char* name = getString();
+    printString(" -- Enter Last Name: ");
+    char* lastName = getString();
+    printString(" -- Enter ID: ");
+    char* id = getString();
+
+    struct Profile *p = malloc(sizeof(struct Profile));
+    assert(p);
+
+    p->name = malloc(strlen(name) + 1);
+    p->lastName = malloc(strlen(lastName) + 1);
+    p->id = malloc(strlen(id) + 1);
+    memcpy(p->name, name, strlen(name) + 1);  // +1 for the null-terminator
+    memcpy(p->lastName, lastName, strlen(lastName) + 1);
+    memcpy(p->id, id, strlen(id) + 1);
+
+    saveToStorage(p);
+
+    free(name);
+    free(lastName);
+    free(id);
+
+    printString("\nProfile Added Successfully! ✅\n");
+
     return BACK;
 }
 
@@ -89,20 +115,22 @@ int act_deleteProfile()
 
 int act_editProfile()
 {
-    return BACK;
+    return PROFILE_MENU;
 }
 
 int act_showAllProfiles()
 {
-    printString("\nAll Profiles 👥👥\n");
+    printString("\nAll Profiles\n");
+    printString(" -- Start -- \n");
     printAllProfiles();
-    return ALL_PROFILES_ACTIONS;;
+    printString("\n -- End -- \n");
+    return ALL_PROFILES_ACTIONS;
 }
 
 int act_showSelectedProfile()
 {
     printSelectedProfile();
-    return BACK;
+    return PROFILE_MENU;
 }
 
 int act_help()
@@ -112,7 +140,7 @@ int act_help()
 
 int act_profileMenu()
 {
-    printString("\nProfile Menu 👤\n");
+    printString("\nCurrent Profile Menu 👤\n");
     printString(" -- Print: p\n");
     printString(" -- Edit: e\n");
     printString(" -- Delete: d\n");
@@ -144,7 +172,7 @@ int act_profileMenu()
 
 int act_allProfilesActions()
 {
-    printString("\nActions 🆔\n");
+    printString("\nAll Profiles Menu 👥\n");
     printString(" -- Select Profile: s\n");
     printString(" -- Back: b\n");
     char key = getKey();

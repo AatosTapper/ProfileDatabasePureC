@@ -1,5 +1,5 @@
 
-// "Action" is an operation that the program can execute
+// "Action" is an ui element
 
 // An action can lead to other actions if it
 // returns a number corresponding to another action.
@@ -13,7 +13,10 @@
 #ifndef ACTION
 #define ACTION
 
+#include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "string.h"
 #include "storage.h"
 
@@ -29,8 +32,8 @@ typedef enum ACTION
     HELP = 5,
     SHOW_SELECTED_PROFILE = 6,
     PROFILE_MENU = 7,
-    ALL_PROFILES_ACTIONS = 8
-} ACTION;
+    ALL_PROFILES_ACTIONS = 8,
+};
 
 int act_mainMenu();
 int act_selectProfile();

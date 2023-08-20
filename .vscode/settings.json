@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "loop.h": "c",
-        "action.h": "c"
+        "action.h": "c",
+        "stdio.h": "c"
     }
 }

@@ -62,7 +62,7 @@ int selectProfile(char* name, char* id)
     {
         return -1;
     }
-    
+
     return 0;
 }
 
