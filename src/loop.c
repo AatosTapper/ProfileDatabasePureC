@@ -1,10 +1,12 @@
 
 #include "loop.h"
 
+
+
 void runLoop()
 {
     initStorage();
-
+    lastAction = BACK;
     int menuVal = 0;
     printString("\n----PROFILE-DATABASE---\n");
     do 
@@ -58,8 +60,8 @@ void executeAction(int a)
         executeAction(act_profileMenu());
         break;
 
-    case ALL_PROFILES_ACTIONS:
-        executeAction(act_allProfilesActions());
+    case ALL_PROFILES_MENU:
+        executeAction(act_allProfilesMenu());
         break;
 
     default:

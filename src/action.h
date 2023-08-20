@@ -23,7 +23,8 @@
 typedef enum ACTION
 {
     EXIT = -2,
-    BACK = -1,
+    BACK = -1, // Basically MAIN_MENU
+
     SELECT_PROFILE = 0,
     ADD_PROFILE = 1,
     DELETE_PROFILE = 2,
@@ -32,8 +33,10 @@ typedef enum ACTION
     HELP = 5,
     SHOW_SELECTED_PROFILE = 6,
     PROFILE_MENU = 7,
-    ALL_PROFILES_ACTIONS = 8,
-};
+    ALL_PROFILES_MENU = 8,
+} ACTION;
+
+ACTION lastAction;
 
 int act_mainMenu();
 int act_selectProfile();
@@ -44,6 +47,6 @@ int act_showAllProfiles();
 int act_showSelectedProfile();
 int act_help();
 int act_profileMenu();
-int act_allProfilesActions();
+int act_allProfilesMenu();
 
 #endif

@@ -21,6 +21,7 @@ int act_mainMenu()
 
     char key = getKey();
 
+    lastAction = BACK;
     switch (key)
     {
     case 's':
@@ -57,6 +58,7 @@ int act_selectProfile()
     free(name);
     free(id);
 
+    lastAction = SELECT_PROFILE;
     if (output == -1)
     {
         printString("\nProfile Wasn't Found... ❌\n");
@@ -93,7 +95,7 @@ int act_addProfile()
     p->name = malloc(strlen(name) + 1);
     p->lastName = malloc(strlen(lastName) + 1);
     p->id = malloc(strlen(id) + 1);
-    memcpy(p->name, name, strlen(name) + 1);  // +1 for the null-terminator
+    memcpy(p->name, name, strlen(name) + 1);
     memcpy(p->lastName, lastName, strlen(lastName) + 1);
     memcpy(p->id, id, strlen(id) + 1);
 
@@ -105,16 +107,19 @@ int act_addProfile()
 
     printString("\nProfile Added Successfully! ✅\n");
 
+    lastAction = ADD_PROFILE;
     return BACK;
 }
 
 int act_deleteProfile()
 {
+    lastAction = DELETE_PROFILE;
     return BACK;
 }
 
 int act_editProfile()
 {
+    lastAction = EDIT_PROFILE;
     return PROFILE_MENU;
 }
 
@@ -124,17 +129,20 @@ int act_showAllProfiles()
     printString(" -- Start -- \n");
     printAllProfiles();
     printString("\n -- End -- \n");
-    return ALL_PROFILES_ACTIONS;
+    lastAction = SHOW_ALL_PROFILES;
+    return ALL_PROFILES_MENU;
 }
 
 int act_showSelectedProfile()
 {
     printSelectedProfile();
+    lastAction = SHOW_SELECTED_PROFILE;
     return PROFILE_MENU;
 }
 
 int act_help()
 {
+    lastAction = HELP;
     return BACK;
 }
 
@@ -148,6 +156,7 @@ int act_profileMenu()
 
     char key = getKey();
 
+    lastAction = PROFILE_MENU;
     switch (key)
     {
     case 'p':
@@ -170,13 +179,14 @@ int act_profileMenu()
     return PROFILE_MENU;
 }
 
-int act_allProfilesActions()
+int act_allProfilesMenu()
 {
     printString("\nAll Profiles Menu 👥\n");
     printString(" -- Select Profile: s\n");
     printString(" -- Back: b\n");
     char key = getKey();
 
+    lastAction = ALL_PROFILES_MENU;
     switch (key)
     {
     case 's':
@@ -190,5 +200,5 @@ int act_allProfilesActions()
     }
 
     printString("\nInvalid Input ❌\n");
-    return ALL_PROFILES_ACTIONS;
+    return ALL_PROFILES_MENU;
 }
