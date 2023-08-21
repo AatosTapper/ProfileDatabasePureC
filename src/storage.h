@@ -1,6 +1,6 @@
 
-#ifndef STORAGE
-#define STORAGE
+#ifndef STORAGE_H
+#define STORAGE_H
 
 #include "profile.h"
 #include "string.h"
@@ -19,6 +19,7 @@ dynArray;
 
 // -1 = profile not found
 int selectProfile(char* name, char* id);
+struct Profile* getSelectedProfile();
 void initStorage();
 void saveToStorage(struct Profile* p);
 void printSelectedProfile();

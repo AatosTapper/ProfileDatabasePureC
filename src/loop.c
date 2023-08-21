@@ -1,12 +1,9 @@
 
 #include "loop.h"
 
-
-
 void runLoop()
 {
     initStorage();
-    lastAction = BACK;
     int menuVal = 0;
     printString("\n----PROFILE-DATABASE---\n");
     do 
@@ -62,6 +59,18 @@ void executeAction(int a)
 
     case ALL_PROFILES_MENU:
         executeAction(act_allProfilesMenu());
+        break;
+
+    case CHANGE_PROFILE_NAME:
+        executeAction(act_changeProfileName());
+        break;
+
+    case CHANGE_PROFILE_LAST_NAME:
+        executeAction(act_changeProfileLastName());
+        break;
+
+    case CHANGE_PROFILE_ID:
+        executeAction(act_changeProfileId());
         break;
 
     default:

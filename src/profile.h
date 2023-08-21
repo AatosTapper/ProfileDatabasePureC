@@ -1,6 +1,6 @@
 
-#ifndef PROFILE
-#define PROFILE
+#ifndef PROFILE_H
+#define PROFILE_H
 
 struct Profile
 {

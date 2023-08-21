@@ -10,8 +10,8 @@
 // logic, that can be easily implemented:
 // -> just return the next action's index
 
-#ifndef ACTION
-#define ACTION
+#ifndef ACTION_H
+#define ACTION_H
 
 #include <assert.h>
 #include <stdio.h>
@@ -34,9 +34,12 @@ typedef enum ACTION
     SHOW_SELECTED_PROFILE = 6,
     PROFILE_MENU = 7,
     ALL_PROFILES_MENU = 8,
+    CHANGE_PROFILE_NAME = 9,
+    CHANGE_PROFILE_LAST_NAME = 10,
+    CHANGE_PROFILE_ID = 11
 } ACTION;
 
-ACTION lastAction;
+extern ACTION lastAction;
 
 int act_mainMenu();
 int act_selectProfile();
@@ -48,5 +51,8 @@ int act_showSelectedProfile();
 int act_help();
 int act_profileMenu();
 int act_allProfilesMenu();
+int act_changeProfileName();
+int act_changeProfileLastName();
+int act_changeProfileId();
 
 #endif

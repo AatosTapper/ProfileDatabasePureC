@@ -34,7 +34,7 @@ $(TARGET): $(OBJS)
 
 # Clean the build
 clean:
-	rm -rf $(BUILD_DIR)/* $(BIN_DIR)/*
+	del /s /q $(BUILD_DIR) $(BIN_DIR)
 
 # del /s /q $(BUILD_DIR) $(BIN_DIR) <- Windows
 # rm -rf $(BUILD_DIR)/* $(BIN_DIR)/* <- MacOS

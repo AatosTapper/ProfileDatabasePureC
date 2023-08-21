@@ -1,6 +1,8 @@
 
 #include "action.h"
 
+lastAction = BACK;
+
 char getKey()
 {
     printString("\nInput: ");
@@ -120,6 +122,34 @@ int act_deleteProfile()
 int act_editProfile()
 {
     lastAction = EDIT_PROFILE;
+
+    printString("\nEdit Profile\n");
+    printString(" -- Change First Name: f\n");
+    printString(" -- Change Last Name: l\n");
+    printString(" -- Change ID: i\n");
+    printString(" -- Back: b\n");
+
+    char key = getKey();
+
+    lastAction = EDIT_PROFILE;
+    switch (key)
+    {
+    case 'f':
+        return CHANGE_PROFILE_NAME;
+
+    case 'l':
+        return CHANGE_PROFILE_LAST_NAME;
+
+    case 'i':
+        return CHANGE_PROFILE_ID;
+
+    case 'b':
+        return BACK;
+    
+    default:
+        break;
+    }
+
     return PROFILE_MENU;
 }
 
@@ -201,4 +231,46 @@ int act_allProfilesMenu()
 
     printString("\nInvalid Input ❌\n");
     return ALL_PROFILES_MENU;
+}
+
+int act_changeProfileName()
+{
+    printString("\nNew First Name: ");
+    char* new = getString();
+    struct Profile* sp = getSelectedProfile();
+    free(sp->name);
+    sp->name = malloc(strlen(new) + 1);
+    memcpy(sp->name, new, strlen(new) + 1);
+
+    printf("\n\nChanged First Name To: %s\n", sp->name);
+
+    return EDIT_PROFILE;
+}
+
+int act_changeProfileLastName()
+{
+    printString("\nNew Last Name: ");
+    char* new = getString();
+    struct Profile* sp = getSelectedProfile();
+    free(sp->lastName);
+    sp->lastName = malloc(strlen(new) + 1);
+    memcpy(sp->lastName, new, strlen(new) + 1);
+
+    printf("\n\nChanged Last Name To: %s\n", sp->lastName);
+
+    return EDIT_PROFILE;
+}
+
+int act_changeProfileId()
+{
+    printString("\nNew ID: ");
+    char* new = getString();
+    struct Profile* sp = getSelectedProfile();
+    free(sp->id);
+    sp->id = malloc(strlen(new) + 1);
+    memcpy(sp->id, new, strlen(new) + 1);
+
+    printf("\n\nChanged ID To: %s\n", sp->id);
+
+    return EDIT_PROFILE;
 }

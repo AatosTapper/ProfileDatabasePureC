@@ -66,6 +66,12 @@ int selectProfile(char* name, char* id)
     return 0;
 }
 
+struct Profile* getSelectedProfile()
+{
+    assert(selectedProfile);
+    return selectedProfile;
+}
+
 void freeStorage()
 {
     free(profiles->arr);
