@@ -4,6 +4,7 @@
 
 #include "profile.h"
 #include "string.h"
+#include "fileSave.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
