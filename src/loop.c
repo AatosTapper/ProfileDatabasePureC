@@ -73,6 +73,22 @@ void executeAction(int a)
         executeAction(act_changeProfileId());
         break;
 
+    case CHANGE_PROFILE_BIRTHDAY:
+        executeAction(act_changeProfileBirthday());
+        break;
+
+    case CHANGE_PROFILE_PERSONALITY:
+        executeAction(act_changeProfilePersonality());
+        break;
+
+    case CHANGE_PROFILE_SPECIALITY:
+        executeAction(act_changeProfileSpeciality());
+        break;
+
+    case CHANGE_PROFILE_DESCRIPTION:
+        executeAction(act_changeProfileDescription());
+        break;
+
     default:
         break;
     }

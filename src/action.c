@@ -90,6 +90,14 @@ int act_addProfile()
     char* lastName = getString();
     printString(" -- Enter ID: ");
     char* id = getString();
+    printString(" -- Enter Birthday: ");
+    char* bd = getString();
+    printString(" -- Enter Personality: ");
+    char* personality = getString();
+    printString(" -- Enter Speciality: ");
+    char* speciality = getString();
+    printString(" -- Enter Description: ");
+    char* description = getString();
 
     struct Profile *p = malloc(sizeof(struct Profile));
     assert(p);
@@ -97,15 +105,27 @@ int act_addProfile()
     p->name = malloc(strlen(name) + 1);
     p->lastName = malloc(strlen(lastName) + 1);
     p->id = malloc(strlen(id) + 1);
+    p->birthday = malloc(strlen(bd) + 1);
+    p->personality = malloc(strlen(personality) + 1);
+    p->speciality = malloc(strlen(speciality) + 1);
+    p->description = malloc(strlen(description) + 1);
     memcpy(p->name, name, strlen(name) + 1);
     memcpy(p->lastName, lastName, strlen(lastName) + 1);
     memcpy(p->id, id, strlen(id) + 1);
-
-    saveToStorage(p);
+    memcpy(p->birthday, bd, strlen(bd) + 1);
+    memcpy(p->personality, personality, strlen(personality) + 1);
+    memcpy(p->speciality, speciality, strlen(speciality) + 1);
+    memcpy(p->description, description, strlen(description) + 1);
 
     free(name);
     free(lastName);
     free(id);
+    free(bd);
+    free(personality);
+    free(speciality);
+    free(description);
+
+    saveToStorage(p);
 
     printString("\nProfile Added Successfully! ✅\n");
 
@@ -127,6 +147,9 @@ int act_editProfile()
     printString(" -- Change First Name: f\n");
     printString(" -- Change Last Name: l\n");
     printString(" -- Change ID: i\n");
+    printString(" -- Change Birthday: d\n");
+    printString(" -- Change Personality: p\n");
+    printString(" -- Change Speciality: s\n");
     printString(" -- Back: b\n");
 
     char key = getKey();
@@ -142,11 +165,25 @@ int act_editProfile()
 
     case 'i':
         return CHANGE_PROFILE_ID;
+        
+    case 'd':
+        return CHANGE_PROFILE_BIRTHDAY;
+
+    case 'p':
+        return CHANGE_PROFILE_PERSONALITY;
+
+    case 's':
+        return CHANGE_PROFILE_SPECIALITY;
+
+    case 'e':
+        return CHANGE_PROFILE_DESCRIPTION;
 
     case 'b':
         return BACK;
     
     default:
+        printf("\nNot a valid input... ❌\n");
+        return EDIT_PROFILE;
         break;
     }
 
@@ -271,6 +308,62 @@ int act_changeProfileId()
     memcpy(sp->id, new, strlen(new) + 1);
 
     printf("\n\nChanged ID To: %s\n", sp->id);
+
+    return EDIT_PROFILE;
+}
+
+int act_changeProfileBirthday()
+{
+    printString("\nNew Birthday: ");
+    char* new = getString();
+    struct Profile* sp = getSelectedProfile();
+    free(sp->birthday);
+    sp->birthday = malloc(strlen(new) + 1);
+    memcpy(sp->birthday, new, strlen(new) + 1);
+
+    printf("\n\nChanged Birthday To: %s\n", sp->personality);
+
+    return EDIT_PROFILE;
+}
+
+int act_changeProfilePersonality()
+{
+    printString("\nNew Personality: ");
+    char* new = getString();
+    struct Profile* sp = getSelectedProfile();
+    free(sp->personality);
+    sp->personality = malloc(strlen(new) + 1);
+    memcpy(sp->personality, new, strlen(new) + 1);
+
+    printf("\n\nChanged Personality To: %s\n", sp->personality);
+
+    return EDIT_PROFILE;
+}
+
+int act_changeProfileSpeciality()
+{
+    printString("\nNew Speciality: ");
+    char* new = getString();
+    struct Profile* sp = getSelectedProfile();
+    free(sp->speciality);
+    sp->speciality = malloc(strlen(new) + 1);
+    memcpy(sp->speciality, new, strlen(new) + 1);
+
+    printf("\n\nChanged Speciality To: %s\n", sp->speciality);
+
+    return EDIT_PROFILE;
+}
+
+int act_changeProfileDescription()
+{
+    printString("\nNew Description: ");
+    char* new = getString();
+    struct Profile* sp = getSelectedProfile();
+    free(sp->description);
+    sp->description = malloc(strlen(new) + 1);
+    memcpy(sp->description, new, strlen(new) + 1);
+
+    printf("\n\nChanged Description To: %s\n", sp->speciality);
 
     return EDIT_PROFILE;
 }

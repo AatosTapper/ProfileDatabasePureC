@@ -74,6 +74,7 @@ struct Profile* getSelectedProfile()
 
 void freeStorage()
 {
+    saveToFile(profiles->arr, profiles->realSize);
     free(profiles->arr);
     free(profiles);
 }
@@ -87,14 +88,26 @@ void printProfile(struct Profile* p)
 
     printString("\nProfile:");
 
+    printString("\n    ID: ");
+    printString(p->id);
+
     printString("\n    First Name: ");
     printString(p->name);
 
     printString("\n    Last Name: ");
-    printString(p->lastName);
+    printString(p->lastName);    
 
-    printString("\n    ID: ");
-    printString(p->id);
+    printString("\n    Birthday: ");
+    printString(p->birthday);
+
+    printString("\n    Personality: ");
+    printString(p->personality);
+
+    printString("\n    Description: ");
+    printString(p->description);
+
+    printString("\n    Speciality: ");
+    printString(p->speciality);
 
     printString("\n    ----\n");
 }

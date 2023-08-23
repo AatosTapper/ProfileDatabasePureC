@@ -36,7 +36,11 @@ typedef enum ACTION
     ALL_PROFILES_MENU = 8,
     CHANGE_PROFILE_NAME = 9,
     CHANGE_PROFILE_LAST_NAME = 10,
-    CHANGE_PROFILE_ID = 11
+    CHANGE_PROFILE_ID = 11,
+    CHANGE_PROFILE_BIRTHDAY = 12,
+    CHANGE_PROFILE_PERSONALITY = 13,
+    CHANGE_PROFILE_SPECIALITY = 14,
+    CHANGE_PROFILE_DESCRIPTION = 15
 } ACTION;
 
 extern ACTION lastAction;
@@ -54,5 +58,9 @@ int act_allProfilesMenu();
 int act_changeProfileName();
 int act_changeProfileLastName();
 int act_changeProfileId();
+int act_changeProfileBirthday();
+int act_changeProfilePersonality();
+int act_changeProfileSpeciality();
+int act_changeProfileDescription();
 
 #endif

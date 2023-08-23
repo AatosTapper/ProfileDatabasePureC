@@ -27,5 +27,4 @@ void printSelectedProfile();
 void printAllProfiles();
 void freeStorage();
 
-
 #endif
