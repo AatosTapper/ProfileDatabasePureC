@@ -1,7 +1,7 @@
 
 #include "string.h"
 
-#define MAX_STR_LEN 100
+#define MAX_STR_LEN 128
 
 void printString(char* ptr)
 {
