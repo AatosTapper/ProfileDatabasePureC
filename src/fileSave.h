@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <math.h>
 #include "profile.h"
 
 void saveToFile(struct Profile* arr, unsigned realSize);
