@@ -16,12 +16,32 @@ int getProfileByName(char* name)
     return -1;
 }
 
+void getProfilesFromFile()
+{
+    unsigned size = 0; // WHY IS THIS 0 ???
+    struct Profile* temp = readFromFile(&size);
+    
+    if (temp == NULL)
+    {
+        printf("No presaved profiles in the database\n");
+        return;
+    }
+    printf("%d", size);
+    for (unsigned i = 0; i < size; i++)
+    {
+        printf("%s", temp->name);
+        saveToStorage(temp);
+        temp++;
+    }
+}
+
 void initStorage()
 {
     profiles = malloc(sizeof(dynArray));
     profiles->size = 4;
     profiles->realSize = 0;
     profiles->arr = malloc(sizeof(struct Profile) * profiles->size);
+    getProfilesFromFile();
 }
 
 void saveToStorage(struct Profile* p)
@@ -75,7 +95,15 @@ struct Profile* getSelectedProfile()
 void freeStorage()
 {
     saveToFile(profiles->arr, profiles->realSize);
-    free(profiles->arr);
+    for (unsigned i = 0; i < profiles->realSize; i++)
+    {
+        if (profiles->arr == NULL)
+        {
+            continue;
+        }
+        free(profiles->arr);
+        profiles->arr++;
+    }
     free(profiles);
 }
 

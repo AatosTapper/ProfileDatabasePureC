@@ -3,13 +3,16 @@
 
 void setAndIncrement(char** to, char* from, size_t size)
 {
-    if (*to && from) {
-        memcpy(*to, from, size);
-        *to += size;
-        if (*to) {
-            **to = '\n';
-            (*to)++;
-        }
+    if (!*to && !from) {
+        return;
+    }
+
+    memcpy(*to, from, size);
+    *to += size;
+    if (*to) 
+    {
+        **to = '\n';
+        (*to)++;
     }
 }
 
@@ -29,7 +32,7 @@ char* parseProfile(struct Profile* p)
     size = fnSize + lnSize + idSize + bdSize +
            personalitySize + specialitySize + descriptionSize + 7; // Include space for newlines and null-terminator
 
-    char* output = malloc(size);
+    char* output = malloc(size + 1);
     char* outputPtr = output;
 
     setAndIncrement(&outputPtr, p->name, fnSize);
@@ -96,7 +99,76 @@ void saveToFile(struct Profile* arr, unsigned realSize)
     free(buffer);
 }
 
-void readFromFile(struct Profile* arr, unsigned* realSize)
+void convertToProfile(struct Profile* profiles, char* fileBuffer)
 {
+    while (fileBuffer != NULL)
+    {
+        profiles->name = fileBuffer;
+        fileBuffer += MAX_LINE;
+        profiles->lastName = fileBuffer;
+        fileBuffer += MAX_LINE;
+        profiles->id = fileBuffer;
+        fileBuffer += MAX_LINE;
+        profiles->birthday = fileBuffer;
+        fileBuffer += MAX_LINE;
+        profiles->personality = fileBuffer;
+        fileBuffer += MAX_LINE;
+        profiles->speciality = fileBuffer;
+        fileBuffer += MAX_LINE;
+        profiles->description = fileBuffer;
+        fileBuffer += MAX_LINE;
 
+        profiles++;
+    }
+}
+
+struct Profile* readFromFile(unsigned* size)
+{
+    FILE *file = fopen("savedata/save.txt", "r");
+    unsigned lines = 1;
+    unsigned pLen = 0;
+    char c; // iterator
+
+    if (file == NULL) 
+    {
+        perror("Error opening file");
+        return;
+    }
+
+    while ((c = getc(file)) != EOF) 
+    {
+        if (c == '\n') {
+            lines++;
+        }
+    }
+
+    rewind(file);
+
+    if (lines < P_SIZE)
+    {
+        fclose(file);
+        return NULL;
+    }
+
+    char* buffer = malloc(lines * MAX_LINE + 1);
+    char* currentLine = malloc(MAX_LINE);
+
+    while (fgets(currentLine, MAX_LINE, file) != NULL) {
+        memcpy(buffer + MAX_LINE * pLen, currentLine, MAX_LINE);
+        pLen++;
+    }
+    buffer++;
+    buffer = '\0';
+
+    fclose(file);
+
+    free(currentLine);
+
+    pLen /= P_SIZE;
+    size = pLen;
+    struct Profile* profiles = malloc(sizeof(struct Profile) * pLen); 
+    convertToProfile(profiles, buffer);   
+    free(buffer);
+
+    return profiles;
 }

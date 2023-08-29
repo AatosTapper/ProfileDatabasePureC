@@ -8,7 +8,7 @@
 #include "profile.h"
 
 void saveToFile(struct Profile* arr, unsigned realSize);
-// arguments are directly changed via pointers
-void readFromFile(struct Profile* arr, unsigned* realSize);
+// Caller must free the memory
+struct Profile* readFromFile(unsigned* size);
 
 #endif
